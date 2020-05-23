@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.wyx</groupId>
-    <artifactId>springboot-demo</artifactId>
+    <artifactId>springboot-security-jwt</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>springboot-demo</name>
+    <name>springboot-security-jwt</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -24,6 +24,24 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- wyx common -->
+        <dependency>
+            <groupId>com.wyx</groupId>
+            <artifactId>wyx-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!-- jw t-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
