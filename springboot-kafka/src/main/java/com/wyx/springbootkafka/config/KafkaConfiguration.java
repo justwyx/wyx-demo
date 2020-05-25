@@ -17,7 +17,7 @@ import java.util.Map;
 
 /**
  * @author : Just wyx
- * @Description : TODO 2020/5/25
+ * @Description : kafka生产消费者配置信息
  * @Date : 2020/5/25
  */
 @Configuration

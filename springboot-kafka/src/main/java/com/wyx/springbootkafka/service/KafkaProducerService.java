@@ -1,6 +1,9 @@
 package com.wyx.springbootkafka.service;
 
-import org.junit.Test;
+import com.alibaba.fastjson.JSONObject;
+import com.wyx.springbootkafka.model.TopicMessageParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -12,11 +15,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class KafkaProducerService {
+	private final Logger logger= LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
 	private KafkaTemplate kafkaTemplate;
 
-	@Test
-	public void sendTest(String value) {
-		kafkaTemplate.send("topic.test", value);
+	public void sendMessage(TopicMessageParam param) {
+		logger.info("sendMessage:{}", JSONObject.toJSONString(param));
+		kafkaTemplate.send(param.getTopic(), param.getMessage());
 	}
 }
