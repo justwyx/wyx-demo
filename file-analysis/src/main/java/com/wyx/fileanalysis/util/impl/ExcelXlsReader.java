@@ -1,9 +1,12 @@
-package com.wyx.fileanalysis.util;
+package com.wyx.fileanalysis.util.impl;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wyx.fileanalysis.util.ExcelRowReader;
+import com.wyx.fileanalysis.util.FileParseUtil;
+import com.wyx.fileanalysis.util.IExcelRowReader;
 import org.apache.poi.hssf.eventusermodel.EventWorkbookBuilder.SheetRecordCollectingListener;
 import org.apache.poi.hssf.eventusermodel.FormatTrackingHSSFListener;
 import org.apache.poi.hssf.eventusermodel.HSSFEventFactory;
@@ -75,7 +78,7 @@ public class ExcelXlsReader implements HSSFListener {
 	private int curRow = 0;
 
 	// 存储行记录的容器
-	private List<String> rowlist = new ArrayList<String>();;
+	private List<String> rowlist = new ArrayList<String>();
 
 	@SuppressWarnings("unused")
 	private String sheetName;
@@ -255,10 +258,10 @@ public class ExcelXlsReader implements HSSFListener {
 	public static void main(String[] args) {
 		IExcelRowReader rowReader = new ExcelRowReader();
 		try {
-			// ExcelReaderUtil.readExcel(rowReader,
+			// FileParseUtil.readExcel(rowReader,
 			// "E://2016-07-04-011940a.xls");
 			System.out.println("**********************************************");
-			ExcelReaderUtil.readExcel(rowReader, "E://test.xlsx");
+			FileParseUtil.readExcel(rowReader, "file/test_hssf.xls");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

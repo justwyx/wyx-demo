@@ -1,7 +1,7 @@
 package com.wyx.fileanalysis.util;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wyx.fileanalysis.constant.constant;
+import com.wyx.fileanalysis.constant.Constant;
 import com.wyx.fileanalysis.model.FormFileDTO;
 import com.wyx.fileanalysis.model.FromPageDataDTO;
 import org.apache.poi.ss.usermodel.*;
@@ -36,7 +36,7 @@ public class XSSFAnalysisUtil {
 	 * @return : com.wyx.fileanalysis.model.FormFileDTO
 	 */
 	public static FormFileDTO analysis(String file) throws IOException {
-		return analysis(file, constant.FROM_FILE_DATA_PAGE_SIZE_DEFAULT, constant.FROM_FILE_DATA_ROW_SIZE_DEFAULT, constant.FROM_FILE_DATA_COL_SIZE_DEFAULT);
+		return analysis(file, Constant.FROM_FILE_DATA_PAGE_SIZE_DEFAULT, Constant.FROM_FILE_DATA_ROW_SIZE_DEFAULT, Constant.FROM_FILE_DATA_COL_SIZE_DEFAULT);
 	}
 
 	/**
@@ -74,8 +74,8 @@ public class XSSFAnalysisUtil {
 
 	public static void main(String[] args) throws IOException {
 		// 03版本也可以解析
-//		FormFileDTO excelAsFile = analysis("file/test_hssf.xls", 10, constant.FROM_FILE_DATA_ROW_SIZE_DEFAULT, constant.FROM_FILE_DATA_COL_SIZE_DEFAULT);
-		FormFileDTO excelAsFile = analysis("file/test_xssf.xlsx", 10, constant.FROM_FILE_DATA_ROW_SIZE_DEFAULT, constant.FROM_FILE_DATA_COL_SIZE_DEFAULT);
+//		FormFileDTO excelAsFile = analysis("file/test_hssf.xls", 10, Constant.FROM_FILE_DATA_ROW_SIZE_DEFAULT, Constant.FROM_FILE_DATA_COL_SIZE_DEFAULT);
+		FormFileDTO excelAsFile = analysis("file/prod_price_default.xlsx", 10, Constant.FROM_FILE_DATA_ROW_SIZE_DEFAULT, Constant.FROM_FILE_DATA_COL_SIZE_DEFAULT);
 
 		System.out.println(JSONObject.toJSONString(excelAsFile));
 	}

@@ -1,10 +1,14 @@
-package com.wyx.fileanalysis.util;
+package com.wyx.fileanalysis.util.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import com.wyx.fileanalysis.util.ExcelRowReader;
+import com.wyx.fileanalysis.util.FileParseUtil;
+import com.wyx.fileanalysis.util.IExcelRowReader;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
@@ -28,7 +32,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
  * @Description : TODO 2020/5/27
  * @Date : 2020/5/27
  */
-public class ExcelXlsxReader extends DefaultHandler {
+public class ExcelXlsxReader extends DefaultHandler{
 	private IExcelRowReader rowReader;
 
 	public void setRowReader(IExcelRowReader rowReader) {
@@ -221,10 +225,8 @@ public class ExcelXlsxReader extends DefaultHandler {
 	/**
 	 * 对解析出来的数据进行类型处理
 	 *
-	 * @param value
-	 *            单元格的值（这时候是一串数字）
-	 * @param thisStr
-	 *            一个空字符串
+	 * @param value   单元格的值（这时候是一串数字）
+	 * @param thisStr 一个空字符串
 	 * @return
 	 */
 	@SuppressWarnings("deprecation")
@@ -286,7 +288,7 @@ public class ExcelXlsxReader extends DefaultHandler {
 	public void endElement(String uri, String localName, String name) throws SAXException {
 		// 根据SST的索引值的到单元格的真正要存储的字符串
 		// 这时characters()方法可能会被调用多次
-		if (nextIsString  && StringUtils.isNotEmpty(lastContents) && StringUtils.isNumeric(lastContents)) {
+		if (nextIsString && StringUtils.isNotEmpty(lastContents) && StringUtils.isNumeric(lastContents)) {
 			int idx = Integer.parseInt(lastContents);
 			lastContents = new XSSFRichTextString(sst.getEntryAt(idx)).toString();
 		}
@@ -399,10 +401,10 @@ public class ExcelXlsxReader extends DefaultHandler {
 	public static void main(String[] args) {
 		IExcelRowReader rowReader = new ExcelRowReader();
 		try {
-			// ExcelReaderUtil.readExcel(rowReader,
+			// FileParseUtil.readExcel(rowReader,
 			// "E://2016-07-04-011940a.xls");
-			System.out.println("**********************************************");
-			ExcelReaderUtil.readExcel(rowReader, "file/test_xssf.xlsx");
+//			System.out.println("**********************************************");
+			FileParseUtil.readExcel(rowReader, "file/test_xssf.xlsx");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

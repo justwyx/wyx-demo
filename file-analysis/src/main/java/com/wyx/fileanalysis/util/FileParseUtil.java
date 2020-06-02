@@ -1,11 +1,14 @@
 package com.wyx.fileanalysis.util;
 
+import com.wyx.fileanalysis.util.impl.ExcelXlsReader;
+import com.wyx.fileanalysis.util.impl.ExcelXlsxReader;
+
 /**
+ * @Description : 文件解析-util
  * @author : Just wyx
- * @Description : TODO 2020/5/27
  * @Date : 2020/5/27
  */
-public class ExcelReaderUtil {
+public class FileParseUtil {
 	// excel2003扩展名
 	public static final String EXCEL03_EXTENSION = ".xls";
 	// excel2007扩展名
@@ -42,6 +45,6 @@ public class ExcelReaderUtil {
 	 */
 	public static void main(String[] args) throws Exception {
 		IExcelRowReader rowReader = new ExcelRowReader();
-		ExcelReaderUtil.readExcel(rowReader, "E://test.xls");
+		FileParseUtil.readExcel(rowReader, "file/prod_price_default.xlsx");
 	}
 }
