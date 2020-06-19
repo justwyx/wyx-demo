@@ -1,14 +1,13 @@
-package com.wyx.springbootkafka;
+package com.example.springbootes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringbootKafkaApplication {
-
+public class SpringbootEsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootKafkaApplication.class, args);
+		SpringApplication.run(SpringbootEsApplication.class, args);
 	}
 
 }

@@ -10,4 +10,7 @@
     <packaging>pom</packaging>
     <name>wyx-demo-parent</name>
 
+    <!--<modules>-->
+    <!--<module>springboot-es</module>-->
+    <!--</modules>-->
 </project>

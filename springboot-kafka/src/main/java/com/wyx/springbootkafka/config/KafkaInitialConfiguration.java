@@ -1,32 +1,32 @@
-package com.wyx.springbootkafka.config;
-
-import org.apache.kafka.clients.admin.AdminClient;
-import org.apache.kafka.clients.admin.AdminClientConfig;
-import org.springframework.context.annotation.Bean;
-import org.springframework.kafka.core.KafkaAdmin;
-import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
-import java.util.Map;
-
-/**
- * @author : Just wyx
- * @Description : kafka初始化配置信息
- * @Date : 2020/5/25
- */
-@Component
-public class KafkaInitialConfiguration {
-	@Bean
-	public KafkaAdmin kafkaAdmin() {
-		Map<String, Object> props = new HashMap<>();
-		//配置Kafka实例的连接地址
-		props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
-		KafkaAdmin admin = new KafkaAdmin(props);
-		return admin;
-	}
-
-	@Bean
-	public AdminClient adminClient() {
-		return AdminClient.create(kafkaAdmin().getConfigurationProperties());
-	}
-}
+//package com.wyx.springbootkafka.config;
+//
+//import org.apache.kafka.clients.admin.AdminClient;
+//import org.apache.kafka.clients.admin.AdminClientConfig;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.kafka.core.KafkaAdmin;
+//import org.springframework.stereotype.Component;
+//
+//import java.util.HashMap;
+//import java.util.Map;
+//
+///**
+// * @author : Just wyx
+// * @Description : kafka初始化配置信息
+// * @Date : 2020/5/25
+// */
+//@Component
+//public class KafkaInitialConfiguration {
+//	@Bean
+//	public KafkaAdmin kafkaAdmin() {
+//		Map<String, Object> props = new HashMap<>();
+//		//配置Kafka实例的连接地址
+//		props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
+//		KafkaAdmin admin = new KafkaAdmin(props);
+//		return admin;
+//	}
+//
+//	@Bean
+//	public AdminClient adminClient() {
+//		return AdminClient.create(kafkaAdmin().getConfigurationProperties());
+//	}
+//}

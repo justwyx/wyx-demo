@@ -46,6 +46,10 @@ public class ExcelXlsxSmartPares {
 	 */
 	private Set<String> nullColTitleSet;
 	/**
+	 * 当前列是否为空,true:不是全为空
+	 */
+	private boolean isNotNullCurCol = false;
+	/**
 	 * 解析返回对象
 	 */
 	private FormFileDTO formFileDTO;
@@ -152,6 +156,7 @@ public class ExcelXlsxSmartPares {
 			parser.parse(sheetSource);
 			// 赋值
 			formFileDTO.getPageDataList().add(buildFromPageDataDTO());
+			formFileDTO.addPageNum();
 		}
 	}
 
@@ -239,13 +244,17 @@ public class ExcelXlsxSmartPares {
 				curRowColTitleValueMap.put(curCellKey, curCellValue);
 				if (!"".equals(curCellValue)) {
 					nullColTitleSet.remove(curCellKey);
+
+					isNotNullCurCol = true;
 				}
 			} else {
 				// 如果标签名称为 row ，这说明已到行尾，调用 optRows() 方法
 				if (name.equals("row")) {
 					curRowIndex++;
-
-					curRowColTitleValueMapList.add(curRowColTitleValueMap);
+					if (isNotNullCurCol) {
+						curRowColTitleValueMapList.add(curRowColTitleValueMap);
+						isNotNullCurCol = false;
+					}
 					curRowColTitleValueMap = new HashMap<>();
 				}
 			}
@@ -294,7 +303,7 @@ public class ExcelXlsxSmartPares {
 		}
 
 		int rowNum = curRowColTitleValueMapList.size();
-		int colNum = colTitleTreeSet.size();
+		int colNum = colTitleTreeMap.size();
 
 		String[][] data = new String[rowNum][colNum];
 		String[] colData;
@@ -319,7 +328,7 @@ public class ExcelXlsxSmartPares {
 	public static void main(String[] args) throws Exception {
 		Long time = System.currentTimeMillis();
 
-		ExcelXlsxSmartPares reader = new ExcelXlsxSmartPares("file/test_xssf.xlsx", "文件名.xlsx");
+		ExcelXlsxSmartPares reader = new ExcelXlsxSmartPares("file/仓库库存导入模板.xlsx", "文件名.xlsx");
 		System.out.println(JSONObject.toJSONString(reader.formFileDTO));
 
 		Long endtime = System.currentTimeMillis();

@@ -1,0 +1,16 @@
+
+# Elasticsearch
+# 9200\u7AEF\u53E3\u662F\u7528\u6765\u8BA9HTTP REST API\u6765\u8BBF\u95EEElasticSearch\uFF0C\u800C9300\u7AEF\u53E3\u662F\u4F20\u8F93\u5C42\u76D1\u542C\u7684\u9ED8\u8BA4\u7AEF\u53E3
+elasticSearch:
+  host: 127.0.0.1
+  port: 9200
+  client:
+    connectNum: 10
+    connectPerRoute: 50
+#\u6CE8\u610Fcluster.name\u9700\u8981\u4E0Econfig/elasticsearch.yml\u4E2D\u7684cluster.name\u4E00\u81F4
+  cluster.name: my-application
+#开启彩色日志
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
