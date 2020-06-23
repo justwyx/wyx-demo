@@ -61,6 +61,15 @@ public class KafkaController {
 		}
 		return Result.success(1);
 	}
+
+	@PostMapping(value = "/send/ids", name = "发送测试消息")
+	public Result<Integer> sendIds(@RequestBody TopicMessageParam param) {
+		String topic = param.getTopic();
+		for (Integer id : param.getIdList()) {
+			kafkaProducerService.sendMessage(topic, id.toString());
+		}
+		return Result.success(1);
+	}
 }
 
 

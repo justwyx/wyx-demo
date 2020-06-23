@@ -1,6 +1,5 @@
 package com.wyx.springbootkafka.service;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.wyx.springbootkafka.model.TopicMessageParam;
 import org.slf4j.Logger;
@@ -24,5 +23,10 @@ public class KafkaProducerService {
 	public void sendMessage(TopicMessageParam param) {
 		logger.info("sendMessage:{}", JSONObject.toJSONString(param));
 		kafkaTemplate.send(param.getTopic(), param.getMessage());
+	}
+
+	public void sendMessage(String topic, String str) {
+		logger.info("sendMessage--topic:{},sendMessage:{}", topic, str);
+		kafkaTemplate.send(topic, str);
 	}
 }

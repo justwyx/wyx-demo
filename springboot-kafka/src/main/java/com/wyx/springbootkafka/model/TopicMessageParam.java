@@ -20,12 +20,6 @@ public class TopicMessageParam implements Serializable {
 
 	private List<String> messageList;
 
+	private List<Integer> idList;
 
-	@Override
-	public String toString() {
-		return "TopicMessageParam{" +
-				"topic='" + topic + '\'' +
-				", message='" + message + '\'' +
-				'}';
-	}
 }
