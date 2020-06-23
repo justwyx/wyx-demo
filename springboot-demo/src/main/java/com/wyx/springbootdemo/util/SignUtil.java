@@ -35,23 +35,19 @@ public class SignUtil {
 		for (Map.Entry<String, String> stringStringEntry : paramMap.entrySet()) {
 			paramArray[index++] = stringStringEntry.getKey();
 		}
-		StringBuilder sb = new StringBuilder();
+
 		Arrays.sort(paramArray);
+
+		StringBuilder sb = new StringBuilder();
 		String value;
 		for (String paramKey : paramArray) {
 			value = paramMap.get(paramKey);
 			if (StringUtils.isBlank(value)) {
 				continue;
 			}
-			sb.append(paramKey)
-					.append("=")
-					.append(value)
-					.append("&");
+			sb.append(paramKey).append("=").append(value).append("&");
 		}
-		sb.append("key")
-				.append("=")
-				.append(key);
-		return sb.toString();
+		return sb.append("key=").append(key).toString();
 	}
 
 	private static String getMD5Str(String str) {
@@ -63,8 +59,7 @@ public class SignUtil {
 			return "";
 		}
 		// 16是表示转换为16进制数
-		String md5Str = new BigInteger(1, digest).toString(16);
-		return md5Str;
+		return new BigInteger(1, digest).toString(16);
 	}
 
 
