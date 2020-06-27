@@ -1,9 +1,7 @@
-package com.wyx.springbootkafkaclients.demo1;
+package com.wyx.springbootkafkaclients.consumer;
 
 import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.common.PartitionInfo;
-import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
 import java.time.Duration;

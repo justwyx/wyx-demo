@@ -1,4 +1,4 @@
-package com.wyx.springbootkafkaclients.demo1;
+package com.wyx.springbootkafkaclients.product;
 
 import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.StringSerializer;
