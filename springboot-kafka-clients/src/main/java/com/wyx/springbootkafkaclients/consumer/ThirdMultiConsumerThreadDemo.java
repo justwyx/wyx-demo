@@ -8,14 +8,19 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Properties;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author : Just wyx
  * @Description : 线程封装，每个线程实例化一个 KafkaConsumer 对象
  * @Date : 2020/6/27
  */
-public class FirstMultiConsumerThreadDemo {
+public class ThirdMultiConsumerThreadDemo {
 	public static final String brokerList = "localhost:9092";
 	public static final String topic = "topic-demo";
 	public static final String groupId = "group.demo";
@@ -41,34 +46,44 @@ public class FirstMultiConsumerThreadDemo {
 
 	public static void main(String[] args) {
 		Properties properties = initConfig();
-		int consumerThreadNum = 3;
-		for (int i = 0; i < consumerThreadNum; i++) {
-			new KafkaConsumerThread(properties, topic).start();
-		}
+		int i = Runtime.getRuntime().availableProcessors();
+		KafkaConsumerThread consumerThread = new KafkaConsumerThread(properties, topic, i);
+		consumerThread.start();
 	}
 
 	public static class KafkaConsumerThread extends Thread{
 		private KafkaConsumer<String, String> kafkaConsumer;
+		private ExecutorService executorService;
+		private int threadNumber;
 
-		public KafkaConsumerThread(Properties props, String topic) {
+		public KafkaConsumerThread(Properties props, String topic, int threadNumber) {
 			this.kafkaConsumer = new KafkaConsumer<>(props);
-			this.kafkaConsumer.subscribe(Arrays.asList(topic));
+			this.kafkaConsumer.subscribe(Collections.singletonList(topic));
+			this.threadNumber = threadNumber;
+			executorService = new ThreadPoolExecutor(this.threadNumber, this.threadNumber, 0L, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(1000), new ThreadPoolExecutor.CallerRunsPolicy());
 		}
 
 		@Override
 		public void run(){
-			try {
-				while (true) {
-					ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ofMillis(100));
-					for (ConsumerRecord<String, String> record : records) {
-						System.out.println(record.toString());
-					}
+			while (true) {
+				ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ofMillis(100));
+				if (!records.isEmpty()) {
+					executorService.submit(new RecordsHandler(records));
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				kafkaConsumer.close();
 			}
+		}
+	}
+
+	public static class RecordsHandler extends Thread {
+		public final ConsumerRecords<String, String> records;
+
+		public RecordsHandler(ConsumerRecords<String, String> records) {
+			this.records = records;
+		}
+
+		@Override
+		public void run() {
+			System.out.println(records.toString());
 		}
 	}
 }
