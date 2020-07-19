@@ -3,16 +3,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.1.RELEASE</version>
+        <groupId>com.wyx</groupId>
+        <artifactId>wyx-framework</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.wyx</groupId>
-    <artifactId>wyx-framework</artifactId>
+    <artifactId>springboot-lock-zk</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>wyx-framework</name>
+    <name>springboot-lock-zk</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -22,7 +22,28 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.zookeeper/zookeeper -->
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>5.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>5.0.0</version>
         </dependency>
 
         <dependency>
@@ -38,18 +59,6 @@
         </dependency>
     </dependencies>
 
-    <dependencyManagement>
-        <dependencies>
-            <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
-            <dependency>
-                <groupId>org.apache.kafka</groupId>
-                <artifactId>kafka-clients</artifactId>
-                <version>2.5.0</version>
-            </dependency>
-
-        </dependencies>
-    </dependencyManagement>
-
     <build>
         <plugins>
             <plugin>
@@ -57,7 +66,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-
     </build>
 
 </project>

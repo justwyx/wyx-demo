@@ -111,4 +111,8 @@ public class IndexService {
 //		}
 //	}
 
+	public void updateByQuery() {
+//		client.updateByQuery()
+	}
+
 }
